@@ -1,9 +1,12 @@
 ﻿using FoundationLibrary.TransformSignal;
 using NetManager;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -16,16 +19,18 @@ namespace OnlineTask
         readonly int[] channelsInd = { 4};
         readonly int sampleRate = 1000;
         readonly int freqFrom = 8;
-        readonly int freqTo = 13;
+        readonly int freqTo = 12;
         readonly int window;
         int direction = 0;
 
         private bool buttonClicked = false;
+        private double midle = 100;
+        private List<double> spms = new List<double>();
 
         public Form1()
         {
             InitializeComponent();
-            labels = new Label[] { labelC3, labelT3};
+            labels = new Label[] { labelO1};
             window = (int)(24 * Math.Ceiling(sampleRate / 24.0));
             for (int i = 0; i < channels.Length; i++)
             {
@@ -34,7 +39,7 @@ namespace OnlineTask
             InitChart();
             reseiveClientControl.Client.Reseive += Client_Reseive;
             reseiveClientControl.Client.Error += Client_Error;
-            System.Timers.Timer timer = new System.Timers.Timer(10);
+            System.Timers.Timer timer = new System.Timers.Timer(5);
             timer.Elapsed += Timer_Elapsed; ;
             timer.AutoReset = true;
             timer.Enabled = true;
@@ -118,17 +123,16 @@ namespace OnlineTask
                     sum[0] += fur[j].x * fur[j].x + fur[j].y * fur[j].y;
                 }
                 labels[0].Text = sum[0].ToString("0.##");
-                
-                double leftAvg = (sum[0] + sum[1]) / 2;
-                double rightAvg = (sum[2] + sum[3]) / 2;
-                double k = leftAvg / rightAvg;
+                spms.Add(sum[0]);
+                double leftAvg = (sum[0] + sum[1]) / 2;               
+                double k = leftAvg ;
 
-                if (k > 1.5)
+                if ((sum[0] - midle) < 100)
                 {
                     direction = -1;
                     labelDir.Text = "←";
                 }
-                else if (k < 0.5)
+                else if ((sum[0] - midle) > 100)
                 {
                     direction = 1;
                     labelDir.Text = "→";
@@ -137,11 +141,25 @@ namespace OnlineTask
                 {
                     direction = 0;
                     labelDir.Text = "-";
-                }
-                labelL.Text = leftAvg.ToString("0.##");             
-                labelK.Text = k.ToString("0.##");
+                }           
+                //labelK.Text = k.ToString("0.##");
             }
         }
+
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            await Task.Delay(5000); 
+
+            List<double> spmsLast = spms.Skip(spms.Count - 100).ToList();
+
+            double maxVal = spmsLast.Max();
+            double minVal = spmsLast.Min();
+            midle = (maxVal - minVal) / 2.0;
+
+            labelL.Text = midle.ToString(); 
+        }
+
 
         private void Button_Click(object sender, EventArgs e)
         {
@@ -197,6 +215,18 @@ namespace OnlineTask
         private void button3_Click(object sender, EventArgs e)
         {
             buttonClicked = false;
+        }
+
+        
+
+        private void labelL_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
