@@ -142,7 +142,6 @@ namespace OnlineTask
                     direction = 0;
                     labelDir.Text = "-";
                 }           
-                //labelK.Text = k.ToString("0.##");
             }
         }
 

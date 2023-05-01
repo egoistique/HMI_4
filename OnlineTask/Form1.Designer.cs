@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.reseiveClientControl = new NetManager.Client.ReseiveClientControl();
             this.button = new System.Windows.Forms.Button();
             this.labelL = new System.Windows.Forms.Label();
@@ -111,17 +111,17 @@
             // 
             // chart
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea5);
+            chartArea6.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea6);
             this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend5.Name = "Legend1";
-            this.chart.Legends.Add(legend5);
+            legend6.Name = "Legend1";
+            this.chart.Legends.Add(legend6);
             this.chart.Location = new System.Drawing.Point(600, 0);
             this.chart.Name = "chart";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chart.Series.Add(series5);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart.Series.Add(series6);
             this.chart.Size = new System.Drawing.Size(664, 681);
             this.chart.TabIndex = 22;
             this.chart.Text = "chart";
@@ -185,9 +185,9 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
             this.label6.Location = new System.Drawing.Point(23, 225);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(451, 17);
+            this.label6.Size = new System.Drawing.Size(415, 17);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Это значение принимается за положение в центре экрана";
+            this.label6.Text = "Это значение принимается за положение равновесия";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
@@ -198,7 +198,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(553, 17);
             this.label5.TabIndex = 14;
-            this.label5.Text = "Программа в течение 5 секунд будет вычислять срденее значение СПМ";
+            this.label5.Text = "Программа в течение 5 секунд будет вычислять среднее значение СПМ";
             // 
             // label4
             // 
